@@ -7,7 +7,7 @@ services:
     image: blakeblackshear/frigate:stable-amd64
     devices:
       - /dev/bus/usb:/dev/bus/usb
-      #You should not need to map through other devices for hardware accelleration when the Coral TPU is used.
+      #You should not need to map through other devices for hardware acceleration when the Coral TPU is used.
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /path/to/config.yml:/config/config.yml:ro
