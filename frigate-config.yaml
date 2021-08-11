@@ -1,0 +1,22 @@
+detectors:
+  coral:
+    type: edgetpu
+    device: usb
+    
+cameras:
+  myfirstcamera:
+    ffmpeg:
+      inputs:
+        - path: rtsps://mycamera:port/xxx
+          roles:
+            - detect
+            - rtmp
+    width: 1920
+    height: 1080
+    fps: 5 #Should be sufficient
+
+mqtt:
+  host: mqtt.devnet.local
+  port: 1883
+  topic_prefix: frigate
+  stats_interval: 60
