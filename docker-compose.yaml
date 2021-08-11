@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  frigate:
+    container_name: frigate
+    privileged: true # this may not be necessary for all setups
+    restart: unless-stopped
+    image: blakeblackshear/frigate:stable-amd64
+    devices:
+      - /dev/bus/usb:/dev/bus/usb
+      #You should not need to map through other devices for hardware accelleration when the Coral TPU is used.
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /path/to/config.yml:/config/config.yml:ro
+      - /path/to/media:/media/frigate
+      - type: tmpfs # Optional: 1GB of memory, reduces SSD/SD Card wear
+        target: /tmp/cache
+        tmpfs:
+          size: 1000000000
+    ports:
+      - "5000:5000"
+      - "1935:1935" # RTMP feeds
+    environment:
+      FRIGATE_RTSP_PASSWORD: "password"
